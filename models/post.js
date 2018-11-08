@@ -1,19 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
+const Step = require('./step'),
 
 const postSchema = new Schema({
   title: String,
   date: String,
   text: String,
-  owner: {
+  author: {
     type: ObjectId,
     ref: 'User'
   }, 
-  steps: [{
-    type: ObjectId,
-    ref: 'Steps'
-  }],
+  steps: [Step.schema],
+  
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'

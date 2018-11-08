@@ -155,7 +155,7 @@ votes: {positive: Number, negative: Number}
     - post text
     - array de steps
 - GET /post/:id
-- GET /profile/:id
+- POST /profile/:id
 - PUT /profile/:id
   - body:
     - description
