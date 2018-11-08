@@ -167,16 +167,16 @@ votes: {positive: Number, negative: Number}
 
 ## Links
 
-### Trello/Kanban
+### Trello
 
-[Link to your trello board](https://trello.com) or picture of your physical board
+[Link to your trello board](https://trello.com/b/l79tZuBo/epi-project) or picture of your physical board
 
 ### Git
 
 The url to your repository and to your deployed project
 
-[Client repository Link](http://github.com)
-[Server repository Link](http://github.com)
+[Client repository Link](https://github.com/evukipm/epi-frontend)
+[Server repository Link](https://github.com/evukipm/epi-backend)
 
 [Deploy Link](http://heroku.com)
 
@@ -184,4 +184,4 @@ The url to your repository and to your deployed project
 
 The url to your presentation slides
 
-[Slides Link](http://slides.com)
+[Slides Link](https://slides.com/alexandrapedroche/epi-final-project#/)

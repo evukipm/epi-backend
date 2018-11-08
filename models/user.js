@@ -4,6 +4,12 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
+  avatar: {
+    type: String,
+    default: 'http://placehold.it/100x100'
+  },
+  email: String,
+  description: String,
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -14,3 +20,4 @@ const userSchema = new Schema({
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
