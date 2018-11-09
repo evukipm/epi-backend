@@ -1,14 +1,16 @@
 const express = require('express');
 const moment = require('moment');
+const mongoose = require('mongoose');
+
+const ObjectId = mongoose.Types.ObjectId;
 
 const router = express.Router();
-const Post = '../models.Post';
+const Post = require('../models/post');
 
 router.post('/', (req, res) => {
   const userId = req.session.currentUser._id;
-  author = ObjectId(userId);
-  const { title, text } = req.body;
-  const steps = req.body.steps;
+  const author = ObjectId(userId);
+  const { title, text, steps } = req.body.post;
   const date = moment();
 
   const newPost = new Post({
