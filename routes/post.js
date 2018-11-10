@@ -31,6 +31,7 @@ router.post('/', (req, res) => {
 
 router.get('/', (req, res) => {
   Post.find()
+  .populate('author')
     .then((list) => {
       res.json(list);
     })
