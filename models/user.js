@@ -12,7 +12,7 @@ const userSchema = new Schema({
   email: String,
   description: String,
 });
-console.log('test')
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
