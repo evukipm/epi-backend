@@ -42,7 +42,7 @@ router.get('/', (req, res) => {
 
 router.get('search', (req, res) => {
   const search = req.body
-  console.log(search)
+  console.log
 
   Post.find()
   .populate('author')
