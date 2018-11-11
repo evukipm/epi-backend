@@ -47,6 +47,20 @@ router.get('/post/:id', (req, res) => {
       });
 })
 
+// ADD A FOLLOWER
+router.post('/post/:id', (req, res) => {
+  const followId = ObjectId(req.params.id)
+  const userId = req.session.currentUser._id
+
+  User.findByIdAndUpdate(userId, {following: followId})
+    .then(user => {
+      res.json(user)
+    })
+    .catch(error => {
+      res.json(error)
+    })
+})
+
 
 // DELETE PROFILE BACKLOG
 
