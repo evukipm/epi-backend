@@ -40,6 +40,20 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('search', (req, res) => {
+  const search = req.body
+  console.log(search)
+
+  Post.find()
+  .populate('author')
+    .then((list) => {
+      res.json(list);
+    })
+    .catch((error) => {
+      res.json(error);
+    });
+})
+
 router.get('/:id', (req, res) => {
   const id = req.params.id;
 
