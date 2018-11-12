@@ -1,56 +1,42 @@
 const express = require('express');
-const mongoose = require('mongoose');
 
-const Steps = require('../models/step');
-const Post = require('../models/post');
-
-const ObjectId = mongoose.Types.ObjectId;
 const router = express.Router();
 
-router.put('/:id', (req, res) => {
-  // const id = req.params.id;
-  // const body = req.params.body;
+const mongoose = require('mongoose');
+const Post = require('../models/post');
 
-  const id = req.params.id;
-  const steps = req.body.steps;
+const { ObjectId } = mongoose.Types;
+
+router.put('/:id/increase', (req, res, next) => {
+  const { id } = req.params;
   const stepId = ObjectId(req.body.stepId);
-  const index = req.params.index;
 
-
-  Post.finById(id)
+  Post.findById(id)
     .then((post) => {
-      const steps = post.steps;
-      steps.filter((item) => {
-        console.log(item);
-        return item._id === stepId;
-      });
-    });
+      const postStep = post.steps.id(stepId);
+      postStep.positiveVotes += 1;
+      return post.save();
+    })
+    .then((updatedStep) => {
+      res.status(200).json(updatedStep);
+    })
+    .catch(next);
+});
 
+router.put('/:id/decrease', (req, res, next) => {
+  const { id } = req.params;
+  const stepId = ObjectId(req.body.stepId);
 
-  // Post.findById(id)
-  //   .populate('steps')
-  //   .then((steps) => {
-  //     if (stepId._id === stepId) {
-  //       // Steps.findByIdAndUpdate(stepId, {});
-  //     }
-  //   })
-  //   .then((error) => {
-  //   });
-
-  // const stepId = ObjectId(req.body.steps._id);
-  // console.log(stepId);
-
-
-  // const stepId = ObjectId(req.body.steps.id);
-  // const idStep = ObjectId(req.body.steps.id);
-  // console.log('El body: ', body);
-  // Post.findById(id)
-  //   .then(() => {
-  //     // res.json(list);
-  //   })
-  //   .catch((error) => {
-  //     res.json(error);
-  //   });
+  Post.findById(id)
+    .then((post) => {
+      const postStep = post.steps.id(stepId);
+      postStep.negativeVotes += 1;
+      return post.save();
+    })
+    .then((updatedStep) => {
+      res.status(200).json(updatedStep);
+    })
+    .catch(next);
 });
 
 module.exports = router;

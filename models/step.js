@@ -1,19 +1,17 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const stepsSchema = new Schema({
   index: Number,
   step: String,
-  votes: {
-    positive: {
-      type: Number,
-      default: 0,
-    },
-    negative: {
-      type: Number,
-      default: 0,
-    },
+  positiveVotes: {
+    type: Number,
+    default: 0,
+  },
+  negativeVotes: {
+    type: Number,
+    default: 0,
   },
 });
 
