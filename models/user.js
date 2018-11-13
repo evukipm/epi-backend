@@ -12,10 +12,10 @@ const userSchema = new Schema({
   },
   email: String,
   description: String,
-  following: {
+  following: [{
     type: ObjectId,
     ref: 'User',
-  },
+  }],
   favs: {
     type: ObjectId,
     ref: 'Post',
