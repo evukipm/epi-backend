@@ -31,7 +31,11 @@ router.post('/', (req, res) => {
 
 router.get('/', (req, res) => {
   Post.find()
+<<<<<<< HEAD
     .populate('author')
+=======
+  .populate('author')
+>>>>>>> dev
     .then((list) => {
       res.json(list);
     })
@@ -39,6 +43,23 @@ router.get('/', (req, res) => {
       res.json(error);
     });
 });
+<<<<<<< HEAD
+=======
+
+router.get('search', (req, res) => {
+  const search = req.body
+  console.log
+
+  Post.find()
+  .populate('author')
+    .then((list) => {
+      res.json(list);
+    })
+    .catch((error) => {
+      res.json(error);
+    });
+})
+>>>>>>> dev
 
 router.get('/:id', (req, res) => {
   const id = req.params.id;
