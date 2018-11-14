@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
@@ -11,7 +12,7 @@ router.get('/me', (req, res, next) => {
     res.json(req.session.currentUser);
   } else {
     res.status(404).json({
-      error: 'not-found'
+      error: 'not-found',
     });
   }
 });
@@ -19,7 +20,7 @@ router.get('/me', (req, res, next) => {
 router.post('/login', (req, res, next) => {
   if (req.session.currentUser) {
     return res.status(401).json({
-      error: 'unauthorized'
+      error: 'unauthorized',
     });
   }
 
@@ -27,17 +28,17 @@ router.post('/login', (req, res, next) => {
 
   if (!username || !password) {
     return res.status(422).json({
-      error: 'validation'
+      error: 'validation',
     });
   }
 
   User.findOne({
-      username
-    })
+    username,
+  })
     .then((user) => {
       if (!user) {
         return res.status(404).json({
-          error: 'not-found'
+          error: 'not-found',
         });
       }
       if (bcrypt.compareSync(password, user.password)) {
@@ -45,7 +46,7 @@ router.post('/login', (req, res, next) => {
         return res.status(200).json(user);
       }
       return res.status(404).json({
-        error: 'not-found'
+        error: 'not-found',
       });
     })
     .catch(next);
@@ -55,22 +56,23 @@ router.post('/login', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
   const {
     username,
-    password
+    password,
+    email,
   } = req.body;
 
   if (!username || !password) {
     return res.status(422).json({
-      error: 'empty'
+      error: 'empty',
     });
   }
 
   User.findOne({
-      username
-    }, 'username')
+    username,
+  }, 'username')
     .then((userExists) => {
       if (userExists) {
         return res.status(422).json({
-          error: 'username-not-unique'
+          error: 'username-not-unique',
         });
       }
 
@@ -80,6 +82,7 @@ router.post('/signup', (req, res, next) => {
       const newUser = User({
         username,
         password: hashPass,
+        email,
       });
 
       return newUser.save().then(() => {
@@ -97,7 +100,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/private', isLoggedIn(), (req, res, next) => {
   res.status(200).json({
-    message: 'This is a private message'
+    message: 'This is a private message',
   });
 });
 
